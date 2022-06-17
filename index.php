@@ -30,8 +30,8 @@
                 <label for="r_username" class="mx-3 text-white">Username</label>
                 <input type="text" id="r_username" name="r_username" placeholder="enter your username">
                 <br>
-                <label for="r_email" class="mx-3 text-white">Email</label>
-                <input type="text" id="r_email" name="r_email" placeholder="enter your email">
+                <label for="r_name" class="mx-3 text-white">Name</label>
+                <input type="text" id="r_name" name="r_name" placeholder="enter your name">
                 <br>
                 <label for="r_password" class="mx-3 text-white">Password</label>
                 <input type="password" id="r_password" name="r_password" placeholder="enter your password">
