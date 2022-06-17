@@ -65,6 +65,60 @@
         
     ?>
 
+        <div class="container my-5">
+
+            <?php
+            
+                $blog_id = mysqli_real_escape_string($conn, $_GET['id']);
+
+                $query = "SELECT * FROM blogs where id='".$blog_id."'";
+                $query_run = mysqli_query($conn, $query);
+                $blog = mysqli_fetch_array($query_run)
+            
+            ?>
+
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Comments</h5>
+                            <hr>
+                            <?php
+                                $blog_id = mysqli_real_escape_string($conn, $_GET['id']);
+
+                                $query2 = "SELECT * FROM comments where blog_id='".$blog_id."'";
+                                $result = mysqli_query($conn, $query2);
+
+                                $comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+                                foreach($comments as $comment){
+                            ?>
+                                    <div class="mx-5">
+                                        <h6 class="card-subtitle mb-2 text-muted"> By - <?php echo htmlspecialchars($comment['by_user']) ?></h6>
+                                        <p class="card-text"><?php echo htmlspecialchars($comment['comment_text']) ?></p>
+                                        <hr>
+                                    </div>
+                                    
+                            <?php } ?>
+
+                            <h5 class="card-title">Add a Comment</h5>
+                            <form action="add_comment.php" method="POST" class="my-3">
+                                <input type="hidden" name="blog_id" value="<?php echo htmlspecialchars($blog['id']) ?>">
+                                <label for="comment_text" class="mx-3">Comment</label>
+                                <textarea name="comment_text" id="comment_text" rows="4" placeholder="Write your comment"></textarea>
+                                <br>
+                                <label for="comment_user" class="mx-3">Written By</label>
+                                <input type="text" id="comment_user" name="comment_user" value="<?php echo htmlspecialchars($_SESSION['user_login']) ?>" readonly>
+                                <br>
+                                <button type="submit" name="comment_submit">Post</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     <?php
             include('templates/footer.php');
